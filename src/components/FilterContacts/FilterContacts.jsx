@@ -1,17 +1,14 @@
 import React from "react";
-import { nanoid } from 'nanoid';
 import { LabelFilter, InputFilter } from "./FilterContacts.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { changeFilter } from '../../redux/contactsSlice';
+import { selectFilters } from "redux/selectors";
+import { changedFilter } from "redux/filterSlice";
 
 const FilterContacts = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.contacts.filter);
+  const filter = useSelector(selectFilters);
 
-  const onChange = (event) => {
-    const newFilterValue = event.target.value;
-    dispatch(changeFilter(newFilterValue));
-  };
+  console.log(filter);
 
   return (
     <LabelFilter>
@@ -19,12 +16,11 @@ const FilterContacts = () => {
       <InputFilter
         type="text"
         value={filter}
-        id={nanoid()}
         name="filter"
-        onChange={onChange} 
+        onChange={evt => dispatch(changedFilter(evt.target.value.trim()))} 
       />
     </LabelFilter>
   );
-}
+};
 
 export default FilterContacts;
