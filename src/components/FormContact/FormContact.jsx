@@ -1,11 +1,11 @@
-import * as yup from 'yup';
-import { Formik, Form, ErrorMessage } from 'formik';
-import { Input, ButtonAdd, LabelForm, ErrorText } from './FormContact.styled';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { addContact } from '../../redux/contactsSlice';
-import { v4 as uuidv4 } from 'uuid';
+import { Formik, Form } from 'formik';
+import toast from 'react-hot-toast';
+import * as yup from 'yup';
+import { addContact } from '../../redux/contactsOperations';
+import { selectVisibleContacts } from '../../redux/selectors';
+import { Input, ButtonAdd, LabelForm } from './FormContact.styled';
 
 const schema = yup.object().shape({
   name: yup
@@ -23,18 +23,10 @@ const initialValue = {
   number: '',
 };
 
-const ErrorError = ({ name }) => {
-  return (
-    <ErrorMessage
-      name={name}
-      render={message => <ErrorText>{message}</ErrorText>}
-    />
-  );
-};
-
 const FormContact = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.contacts);
+  const contacts = useSelector(selectVisibleContacts);
+  console.log(contacts);
 
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -50,17 +42,16 @@ const FormContact = () => {
     );
 
     if (existingContactByName) {
-      toast.warn('A contact with this name already exists!');
+      toast.error('A contact with this name already exists!');
       return;
     }
 
     if (existingContactByNumber) {
-      toast.info('A contact with this number already exists!');
+      toast.error('A contact with this number already exists!');
       return;
     }
 
-    const contactWithId = { ...newContact, id: uuidv4() };
-    dispatch(addContact(contactWithId));
+    dispatch(addContact(newContact));
 
     resetForm();
   };
@@ -76,7 +67,6 @@ const FormContact = () => {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
-          <ErrorError name='name' />
         </LabelForm>
         <LabelForm>
           Phone number
@@ -86,7 +76,6 @@ const FormContact = () => {
             title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
             required
           />
-          <ErrorError name='message' />
         </LabelForm>
         <ButtonAdd type='submit'>Add contact</ButtonAdd>
       </Form>
