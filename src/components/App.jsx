@@ -2,8 +2,7 @@ import React from "react";
 import ContactList from "./ContactList";
 import FilterContacts from "./FilterContacts";
 import FormContact from "./FormContact";
-import { ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from 'react-hot-toast';
 import { Container } from './App.styled';
 
 
@@ -15,7 +14,7 @@ export default function App() {
       <h2>Contacts</h2>
       <FilterContacts />
       <ContactList />
-      <ToastContainer theme="colored" />
+      <Toaster />
     </Container>
   );
 }
