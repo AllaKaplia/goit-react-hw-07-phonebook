@@ -1,28 +1,44 @@
-import { nanoid } from 'nanoid';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeContact, fetchContacts } from '../../redux/contactsOperations';
+import { selectError, selectIsLoading, selectVisibleContacts } from '../../redux/selectors';
+import toast from 'react-hot-toast';
 import { ContactsList, ContactItem, RemoveBtn } from './ContactsList.styled';
-import { deleteContact, selectVisibleContacts } from '../../redux/contactsSlice';
+import Loader from 'components/Loader';
 
 const ContactList = () => {
   const dispatch = useDispatch();
   const visibleContacts = useSelector(selectVisibleContacts);
+  const loading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
-  const handleDelete = (name) => {
-    dispatch(deleteContact(name));
+  const handleRemoveContact = (id) => {
+    dispatch(removeContact(id));
+    toast.success('Contact deleted successfully!');
   };
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
-    <ContactsList>
-      {visibleContacts.map(({ name, number }) => (
-      <ContactItem key={nanoid()}>
-      {name}: {number}
-        <RemoveBtn type='button' onClick={() => handleDelete(name)}>
-          Remove
-        </RemoveBtn>
-      </ContactItem>
-    ))}
-    </ContactsList>
+    <div>
+      {visibleContacts.length > 0 && (
+        <ContactsList>
+          {loading && <Loader />}
+          {error && <p>{error}</p>}
+          {visibleContacts.map(({ name, number, id }) => (
+            <ContactItem key={id}>
+              {name}: {number}
+              <RemoveBtn type='button' onClick={() => handleRemoveContact(id)}>
+                Remove
+              </RemoveBtn>
+            </ContactItem>
+          ))}
+        </ContactsList>
+      )}
+    </div>
   );
-}
+};
 
 export default ContactList;
