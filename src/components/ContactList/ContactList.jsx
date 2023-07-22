@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeContact, fetchContacts } from '../../redux/contactsOperations';
 import { selectError, selectIsLoading, selectVisibleContacts } from '../../redux/selectors';
 import toast from 'react-hot-toast';
-import { ContactsList, ContactItem, RemoveBtn } from './ContactsList.styled';
+import { ContactsList, ContactItem, RemoveBtn, DataContacts } from './ContactsList.styled';
 import Loader from 'components/Loader';
 import { MdDeleteForever } from 'react-icons/md';
 import { FcTwoSmartphones } from 'react-icons/fc';
@@ -31,7 +31,7 @@ const ContactList = () => {
           {error && <p>{error}</p>}
           {visibleContacts.map(({ name, number, id }) => (
             <ContactItem key={id}>
-              <FcTwoSmartphones size={40}/> {name}: {number}
+              <FcTwoSmartphones size={40}/> <DataContacts>{name}: {number}</DataContacts>
               <RemoveBtn type='button' onClick={() => handleRemoveContact(id)}>
                 <MdDeleteForever />
                 Remove
