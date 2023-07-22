@@ -21,14 +21,19 @@ export const ContactItem = styled.li`
 `
 
 export const RemoveBtn = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     background-color: #fff;
-    color: #850c0c;
-    border: 1px solid #850c0c;
+    color: #e31c5f;
+    border: 1px solid #e31c5f;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 5px 15px;
+    font-size: 20px;
     cursor: pointer;
     &:hover, &:focus {
-        background-color: #850c0c;
+        background-color: #e31c5f;
         color: #fff;
     }
 `;
