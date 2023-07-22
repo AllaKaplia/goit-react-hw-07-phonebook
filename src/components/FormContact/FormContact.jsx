@@ -5,7 +5,8 @@ import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import { addContact } from '../../redux/contactsOperations';
 import { selectVisibleContacts } from '../../redux/selectors';
-import { Input, ButtonAdd, LabelForm } from './FormContact.styled';
+import { Input, ButtonAdd, LabelForm, FormBox, BigBoxForm } from './FormContact.styled';
+import { MdPlaylistAddCheck } from 'react-icons/md';
 
 const schema = yup.object().shape({
   name: yup
@@ -58,25 +59,32 @@ const FormContact = () => {
   return (
     <Formik initialValues={initialValue} validationSchema={schema} onSubmit={handleFormSubmit}>
       <Form autoComplete='off'>
-        <LabelForm>
-          The name of the new contact
-          <Input
-            type='text'
-            name='name'
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-        </LabelForm>
-        <LabelForm>
-          Phone number
-          <Input
-            type='tel'
-            name='number'
-            title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
-            required
-          />
-        </LabelForm>
-        <ButtonAdd type='submit'>Add contact</ButtonAdd>
+        <BigBoxForm>
+        <FormBox>
+          <LabelForm>
+            The name of the new contact
+            <Input
+              type='text'
+              name='name'
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+            />
+          </LabelForm>
+          <LabelForm>
+            Phone number
+            <Input
+              type='tel'
+              name='number'
+              title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
+              required
+            />
+          </LabelForm>
+        </FormBox>
+        <ButtonAdd type='submit'>
+            <MdPlaylistAddCheck />
+            Add contact
+          </ButtonAdd>
+        </BigBoxForm>
       </Form>
     </Formik>
   );
