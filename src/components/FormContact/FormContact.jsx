@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { addContact } from '../../redux/contactsOperations';
 import { selectVisibleContacts } from '../../redux/selectors';
 import { Input, ButtonAdd, LabelForm, FormBox, BigBoxForm } from './FormContact.styled';
-import { MdPlaylistAddCheck } from 'react-icons/md';
+import { PiAddressBookLight } from 'react-icons/pi';
 
 const schema = yup.object().shape({
   name: yup
@@ -81,7 +81,7 @@ const FormContact = () => {
           </LabelForm>
         </FormBox>
         <ButtonAdd type='submit'>
-            <MdPlaylistAddCheck />
+            <PiAddressBookLight />
             Add contact
           </ButtonAdd>
         </BigBoxForm>
