@@ -26,7 +26,6 @@ const initialValue = {
 const FormContact = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectVisibleContacts);
-  console.log(contacts);
 
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
