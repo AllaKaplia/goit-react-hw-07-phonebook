@@ -37,3 +37,9 @@ export const RemoveBtn = styled.button`
         color: #fff;
     }
 `;
+
+export const DataContacts = styled.span`
+    font-size: 20px;
+    font-weight: 500;
+    color: #3f3030;
+`;
