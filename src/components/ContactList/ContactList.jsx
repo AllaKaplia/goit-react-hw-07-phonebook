@@ -23,7 +23,7 @@ const ContactList = () => {
 
   return (
     <div>
-      {visibleContacts.length > 0 && (
+      {visibleContacts.length > 0 ? (
         <ContactsList>
           {loading && <Loader />}
           {error && <p>{error}</p>}
@@ -36,6 +36,8 @@ const ContactList = () => {
             </ContactItem>
           ))}
         </ContactsList>
+      ) : (
+        <p>No contacts found.</p>
       )}
     </div>
   );
