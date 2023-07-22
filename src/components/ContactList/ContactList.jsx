@@ -25,10 +25,10 @@ const ContactList = () => {
 
   return (
     <div>
+      {loading && <Loader />}
+      {error && <p>{error}</p>}
       {visibleContacts.length > 0 ? (
         <ContactsList>
-          {loading && <Loader />}
-          {error && <p>{error}</p>}
           {visibleContacts.map(({ name, number, id }) => (
             <ContactItem key={id}>
               <FcTwoSmartphones size={40}/> <DataContacts>{name}: {number}</DataContacts>
