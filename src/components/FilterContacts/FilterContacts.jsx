@@ -8,8 +8,6 @@ const FilterContacts = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilters);
 
-  console.log(filter);
-
   return (
     <LabelFilter>
       Filter
