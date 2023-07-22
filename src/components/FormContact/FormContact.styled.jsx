@@ -3,7 +3,7 @@ import { Field } from 'formik';
 
 export const Input = styled(Field)`
     padding: 5px;
-    width: 300px;
+    width: 200px;
     border: 2px solid greenyellow;
     border-radius: 5px;
 `;
